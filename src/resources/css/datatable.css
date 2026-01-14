@@ -1,0 +1,236 @@
+:root {
+  /* default theme */
+  --dt-color-bg: theme(colors.amber.100);
+  --dt-color-text: theme(colors.gray.700);
+  --dt-color-border: theme(colors.amber.200);
+  --dt-color-hover: theme(colors.amber.200);
+  --dt-color-active: theme(colors.amber.500);
+
+  --dt-row-selected: theme(colors.amber.100);
+  --dt-row-selected-text: theme(colors.gray.700);
+  --dt-row-selected-link: theme(colors.purple.700);
+}
+
+.dark {
+  --dt-color-bg: theme(colors.gray.700);
+  --dt-color-text: theme(colors.gray.200);
+  --dt-color-border: theme(colors.gray.600);
+  --dt-color-hover: theme(colors.gray.600);
+  --dt-color-active: theme(colors.gray.600);
+
+  --dt-row-selected: theme(colors.gray.700);
+  --dt-row-selected-text: theme(colors.gray.200);
+  --dt-row-selected-link: theme(colors.amber.700);
+}
+
+@layer components {
+  /* ===============================
+     Container
+  =============================== */
+  .dt-container {
+    @apply w-full text-sm relative p-1;
+  }
+
+  .dt-layout-row {
+    @apply flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4;
+  }
+
+  .dt-layout-cell {
+    @apply flex items-center justify-between gap-2;
+  }
+
+  .dt-layout-full {
+    @apply w-full;
+  }
+
+  /* ===============================
+     Length (entries per page)
+  =============================== */
+  .dt-length {
+    @apply flex items-center gap-2 text-gray-700 dark:text-gray-300;
+  }
+
+  .dt-length select.dt-input {
+    @apply px-3 py-2 border border-(--dt-color-border) rounded-sm 
+           bg-white dark:bg-gray-800 
+           text-gray-800 dark:text-gray-100 
+           focus:outline-none focus:ring-2 focus:ring-amber-400;
+  }
+
+  /* ===============================
+     Search
+  =============================== */
+  .dt-search {
+    @apply flex items-center gap-2 text-gray-700 dark:text-gray-300;
+  }
+
+  .dt-search input.dt-input {
+    @apply px-3 py-2 border border-(--dt-color-border) rounded-sm 
+           bg-white dark:bg-gray-800 
+           text-gray-800 dark:text-gray-100 
+           focus:outline-none focus:ring-2 focus:ring-amber-400;
+  }
+
+  /* ===============================
+     Table
+  =============================== */
+  .dataTable {
+    @apply min-w-full table-auto border border-(--dt-color-border) overflow-hidden;
+  }
+
+  .dataTable thead tr th {
+    @apply px-4 py-3 text-center uppercase font-medium border-0
+           bg-amber-500 dark:bg-gray-500 
+           text-white dark:text-gray-200;
+  }
+
+  .dataTable tbody td {
+    @apply px-4 py-3
+           text-gray-800 dark:text-gray-100 
+           border-t border-(--dt-color-border);
+  }
+
+  .dataTable tbody tr:hover {
+    @apply bg-amber-50 dark:bg-gray-800;
+  }
+
+  .dataTable tbody tr.selected {
+    @apply bg-(--dt-row-selected) text-(--dt-row-selected-text);
+  }
+
+  /* ===============================
+     Info text
+  =============================== */
+  .dt-info {
+    @apply text-sm text-gray-600 dark:text-gray-400;
+  }
+
+  .dt-info .select-info {
+    @apply ml-2;
+  }
+
+  /* ===============================
+     Button
+  =============================== */
+  .dt-buttons {
+    @apply flex flex-row;
+  }
+
+  .dt-button {
+    @apply relative flex items-center justify-between py-2 px-3 mx-[1px] border border-(--dt-color-border) hover:bg-(--dt-color-hover) rounded-sm cursor-pointer;
+  }
+
+  .dt-button .dt-button-down-arrow {
+    @apply ml-2 text-[10px];
+  }
+
+  .dt-button-collection {
+    @apply absolute flex flex-col min-w-33 bg-(--dt-color-bg);
+  }
+
+  .dt-button-collection .dt-button {
+    @apply border-0 w-full;
+  }
+
+  .dt-button-collection .dt-button-active::after {
+    @apply absolute top-1/2 -mt-[10px] right-1 inline-block content-["\2713"];
+  }  
+
+  /* ===============================
+     Pagination
+  =============================== */
+  .dt-paging nav {
+    @apply flex items-center gap-1;
+  }
+
+  .dt-paging-button {
+    @apply px-3 py-1 rounded-md text-sm cursor-pointer
+           text-gray-700 dark:text-gray-200 
+           border border-(--dt-color-border) 
+           hover:bg-amber-100 dark:hover:bg-gray-700
+           transition-colors;
+  }
+
+  .dt-paging-button.current {
+    @apply bg-amber-500 dark:bg-gray-600
+           text-white
+           border-(--dt-color-active);
+  }
+
+  .dt-paging-button.disabled {
+    @apply opacity-50 pointer-events-none hover:bg-transparent;
+  }
+
+  /* ===============================
+     Empty State
+  =============================== */
+  .dt-empty {
+    @apply text-center text-sm text-gray-500 dark:text-gray-400 py-6;
+  }
+
+  /* ===============================
+     Processing Overlay
+  =============================== */
+  div.dt-processing {
+    @apply absolute top-1/2 left-1/2 w-[200px] -ml-[100px] -mt-[22px] 
+           text-center p-1 z-10;
+  }
+
+  div.dt-processing > div:last-child {
+    @apply relative w-20 h-[15px] my-4 mx-auto;
+  }
+
+  div.dt-processing > div:last-child > div {
+    @apply absolute top-0 w-[13px] h-[13px] rounded-full 
+           bg-amber-500 dark:bg-gray-400;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+
+  div.dt-processing > div:last-child > div:nth-child(1) {
+    @apply left-2;
+    animation: datatables-loader-1 0.6s infinite;
+  }
+
+  div.dt-processing > div:last-child > div:nth-child(2) {
+    @apply left-2;
+    animation: datatables-loader-2 0.6s infinite;
+  }
+
+  div.dt-processing > div:last-child > div:nth-child(3) {
+    @apply left-8;
+    animation: datatables-loader-2 0.6s infinite;
+  }
+
+  div.dt-processing > div:last-child > div:nth-child(4) {
+    @apply left-14;
+    animation: datatables-loader-3 0.6s infinite;
+  }
+
+  .notif-success {
+    @apply p-3 mb-2 rounded bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200
+  }
+
+  .notif-success {
+    @apply p-3 mb-2 rounded bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200
+  }
+}
+
+@layer utilities {
+  @keyframes datatables-loader-1 {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+  @keyframes datatables-loader-2 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(24px, 0); }
+  }
+  @keyframes datatables-loader-3 {
+    0% { transform: scale(1); }
+    100% { transform: scale(0); }
+  }
+
+  .animate-dt-loader-1 { animation: datatables-loader-1 0.6s infinite cubic-bezier(0, 1, 1, 0); }
+  .animate-dt-loader-2 { animation: datatables-loader-2 0.6s infinite cubic-bezier(0, 1, 1, 0); }
+  .animate-dt-loader-3 { animation: datatables-loader-3 0.6s infinite cubic-bezier(0, 1, 1, 0); }
+}
+

@@ -1,0 +1,42 @@
+@extends('layout')
+
+@section('title', 'Form {{moduleName}}')
+
+@section('content')
+
+<div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 text-gray-800 dark:text-white mt-4 shadow-md rounded-lg p-6">
+    <h1 class="text-2xl font-bold mb-6">{{moduleName}} Form</h1>
+
+    <div id="notification" class="mb-4"></div>
+
+    <form id="arcForm" class="space-y-5" method="POST">
+        @csrf
+        <input type="hidden" name="{{ $row->getKeyName() }}" value="{{ $row->getKey() ?? '' }}">
+
+        @foreach($columns as $column => $columnName)
+            <div class="flex flex-col">
+                <label for="{{ $column }}" class="mb-1 font-semibold">{{ $columnName }}</label>
+                <input type="text" name="{{ $column }}" id="{{ $column }}" value="{{ old($column, $row->$column ?? '') }}"
+                       class="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100">
+                <small class="text-red-500 italic"></small>
+            </div>
+        @endforeach
+
+        <button type="submit" class="py-1 px-6 border border-blue-400 hover:bg-blue-900 text-blue-400 rounded-lg cursor-pointer mr-2">Save</button>
+        <button type="button" class="py-1 px-5 border border-red-400  hover:bg-red-900  text-red-400 rounded-lg cursor-pointer" onclick="Arc.form.cancel()">Cancel</button>
+    </form>
+</div>
+
+@endsection
+
+@push('scripts')
+<script type="module">
+    Arc.init({pk: '{{ $pk }}'}).form.save('arcForm', {
+        rules: {
+            @foreach(array_keys($columns) as $column)
+                {{ $column }}: 'required',
+            @endforeach
+        }
+    });    
+</script>
+@endpush

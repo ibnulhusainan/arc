@@ -1,0 +1,10 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::namespace('App\Modules\{{moduleNamespace}}\Controllers')->group(function() {
+
+	Route::crud('{{routePrefix}}', {{moduleName}}Controller::class)->withPolicy();
+
+});
+

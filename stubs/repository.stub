@@ -1,0 +1,8 @@
+<?php
+
+namespace App\Modules\{{moduleNamespace}}\Repositories;
+
+use IbnulHusainan\Arc\Base\Repository;
+
+class {{moduleName}}Repository extends Repository {}
+

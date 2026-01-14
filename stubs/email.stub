@@ -1,0 +1,4 @@
+<div class="p-6 bg-white rounded-lg shadow">
+    <h2 class="text-lg font-bold mb-2">{{moduleName}} Notification</h2>
+    <p>Hello, this is a notification from {{moduleName}} module.</p>
+</div>

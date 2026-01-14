@@ -1,0 +1,32 @@
+{
+  "name": "ibnulhusainan/arc",
+  "description": "Automatic Resource Creator for Laravel",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "IbnulHusainan\\Arc\\": "src/"
+    },
+    "files": [
+      "src/Helpers/arcHelper.php",
+      "src/Helpers/cmdHelper.php",
+      "src/Helpers/globalHelper.php",
+      "src/Helpers/classNameHelper.php"
+    ]    
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "IbnulHusainan\\Arc\\Providers\\ArcServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "illuminate/support": "^9.0 || ^10.0 || ^12.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0"
+  }
+}
+

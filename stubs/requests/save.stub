@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Modules\{{moduleNamespace}}\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+
+class Save{{moduleName}}Request extends FormRequest
+{
+	public function authorize(): bool
+	{
+		return true;
+	}
+
+	public function rules(): array
+	{
+		return [
+			{{saveRules}}
+		];
+	}
+}
+

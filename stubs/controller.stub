@@ -1,0 +1,8 @@
+<?php
+
+namespace App\Modules\{{moduleNamespace}}\Controllers;
+
+use IbnulHusainan\Arc\Base\Controller;
+
+class {{moduleName}}Controller extends Controller {}
+

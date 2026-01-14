@@ -1,0 +1,44 @@
+@extends('layout')
+
+@section('title', 'List {{moduleName}}')
+
+@section('content')
+
+<div class="max-w-6xl mx-auto bg-white dark:bg-gray-800 text-gray-800 dark:text-white mt-4 shadow-md rounded-lg p-6">
+    <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-bold mb-6">{{moduleName}} List</h1>
+    </div>
+
+    <div id="notification" class="mb-4"></div>
+
+    <div class="overflow-x-auto">
+        <table id="arcTable"></table>
+    </div>
+</div>
+
+@endsection
+
+@push('scripts')
+<script type="module">
+    new DataTable('#arcTable', {
+        ajax: window.routes?.data,
+        processing: true,
+        serverSide: true,
+        select: {
+            keys: true
+        },
+        columns: [
+            @foreach($columns as $column => $columnName)
+                { title: '{{ $columnName }}', data: '{{ $column }}'},
+            @endforeach
+        ],
+        layout: Arc.init({pk: '{{ $pk }}'}).list.datatableLayout('{{ $pk }}'),          
+        headerCallback: function (thead, data, start, end, display) {
+            $(thead)
+                .addClass('bg-gray-100 dark:bg-gray-700')
+                .find('th')
+                .addClass('px-4 py-2 text-left text-gray-700 dark:text-gray-200');
+        }
+    })
+</script>
+@endpush

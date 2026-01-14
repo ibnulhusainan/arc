@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Modules\{{moduleNamespace}}\Models;
+
+use Illuminate\Database\Eloquent\Model;{{useClass}}
+
+class {{moduleName}} extends Model
+{
+    {{traitModul}}
+    protected $table = '{{tableName}}';
+    {{primaryKey}}
+    {{keyType}}
+    {{incrementing}}
+    {{timestamps}}
+    {{timestampsField}}
+   
+    protected $fillable = [
+        {{fillable}}
+    ];
+
+    protected $casts = [
+        {{casts}}
+    ];
+
+    public array $listColumns = [
+        {{listColumns}}
+    ];
+
+    public array $formColumns = [
+        {{formColumns}}
+    ];
+}

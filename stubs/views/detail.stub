@@ -1,0 +1,42 @@
+@extends('layout')
+
+@section('title', 'Detail {{moduleName}}')
+
+@section('content')
+
+<div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 text-gray-800 dark:text-white mt-4 shadow-md rounded-lg p-6">
+    <h1 class="text-2xl font-bold mb-6">{{moduleName}} Detail</h1>
+
+    <div id="notification" class="mb-4"></div>
+
+    <div class="space-y-5">
+        @foreach($columns as $column => $columnName)
+            <div class="flex flex-col">
+                <label class="mb-1 font-semibold">{{ $columnName }}</label>
+                <div class="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+                    {{ $row->$column ?? '-' }}
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    <div class="mt-6 flex justify-end space-x-3">
+        <a href="{{ route($moduleRoute . '.form', $row->getKey()) }}" 
+           class="py-1 px-5 border border-blue-400 hover:bg-blue-900 text-blue-400 rounded-lg cursor-pointer">
+           Edit
+        </a>
+        <button type="button" 
+                class="py-1 px-5 border border-gray-400 hover:bg-gray-700 text-gray-400 rounded-lg cursor-pointer" 
+                onclick="Arc.navigate.list()">
+            Back
+        </button>
+    </div>
+</div>
+
+@endsection
+
+@push('scripts')
+<script type="module">
+    Arc.init({pk: '{{ $pk }}'});
+</script>
+@endpush

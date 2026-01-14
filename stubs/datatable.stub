@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Modules\{{moduleNamespace}}\Datatables;
+
+class {{moduleName}}Datatable
+{
+    public function render($query)
+    {
+        return \Yajra\DataTables\DataTables::of($query)
+            ->editColumn('created_at', fn($row) => $row->created_at?->format('d/m/Y H:i'))
+            ->make(true);
+    }
+}
+

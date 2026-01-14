@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use IbnulHusainan\Arc\Database\Migrations\Migration;
+
+return new class extends Migration
+{
+    protected ?string $table = '{{tableName}}';
+    protected ?string $module = '{{modulePath}}';
+
+    protected function migrate(): void
+    {
+        Schema::create('{{tableName}}', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+    }
+
+    protected function rollback(): void
+    {
+        Schema::dropIfExists('{{tableName}}');
+    }
+};
